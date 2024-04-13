@@ -1,0 +1,45 @@
+spring:
+  datasource:
+    driverClassName: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/recipes?allowPublicKeyRetrieval=true&useSSL=false&createDatabaseIfNotExist=true&serverTimezone=UTC
+    username: root
+    password: 820320
+  jpa:
+    database-platform: org.hibernate.dialect.MySQL5InnoDBDialect
+    hibernate:
+      ddl-auto: create
+    defer-datasource-initialization: true
+  mvc:
+    hidden-method:
+      filter:
+        enabled: true
+  security:
+    oauth2:
+      client:
+        registration:
+          facebook:
+            client-id: your-client-id-here
+            client-secret: your-secret-here
+  sql:
+    init:
+      mode: always
+
+logging:
+  level:
+    org.hibernate.SQL: DEBUG
+    org.hibernate.type.descriptor.sql.BasicBinder: TRACE
+
+mail:
+  host: "imap.gmail.com"
+  port: 993
+  username: "pasevivan@gmail.com"
+  password: "SofiaBurgas1"
+
+management:
+  server:
+    port: 8080
+  endpoints:
+    web:
+      base-path: /actuator
+      exposure:
+        include: "*"
