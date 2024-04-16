@@ -1,0 +1,141 @@
+<!doctype html>
+<html lang="en"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security" xmlns:th=http://www.thymeleaf.org>
+
+<head>
+    <meta charset="UTF-8">
+    <meta content="IE=edge" http-equiv="X-UA-Compatible">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <meta content="рецепти, готварски рецепти, кулинарни рецепти, готвене, какво да сготвя, храна" name="keywords">
+    <meta content="Готварски рецепти със снимки, необходими продукти, порции, време за приготвяне и стъпки, които да следваш, за да сготвиш своето ястие."
+          property="description">
+    <link href="/images/icon.png" rel="icon" type="image/x-icon">
+    <link href="/css/styles.css" rel="stylesheet" type="text/css"/>
+    <script src="/js/app.js" type="module"></script>
+    <link href="https://fonts.googleapis.com/css?family=Sofia" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Lobster&display=swap" rel="stylesheet">
+</head>
+
+<body>
+<!-- Navigation -->
+<th:block sec:authorize="isAuthenticated()">
+    <a class="text-white" id="welcome" th:href="@{/user/profile}">
+        <th:block
+                th:text="#{navbar_welcome(${#authentication.principal.firstName})}">
+        </th:block>
+    </a>
+</th:block>
+<header>
+    <ul id="nav">
+        <li class="profile" style="width: 80px; float: right; margin-right: 20px;">
+            <form th:method="get">
+                <label for="lang" th:text="#{navbar_language}"></label>
+                <select
+                        id="lang"
+                        name="lang"
+                        onchange="this.form.submit()">
+                    <option th:selected="${#locale.toString()} == 'bg_BG'" value="bg_BG">Български</option>
+                    <option th:selected="${#locale.toString()} == 'en_US'" value="en_US">English</option>
+                </select>
+            </form>
+        </li>
+        <li><a class="active" id="icon" th:href="@{/}">
+            <img alt="logo" id="logo" src="/images/logo.png">
+        </a></li>
+        <li><a th:href="@{/recipes/recipes_dashboard/category/ЗАКУСКА}">
+            <th:block th:text="#{navbar_breakfast}"></th:block> &#x2771;
+            <ul>
+                <li>
+                    <a class="search-by-subcat" th:href="@{/recipes/recipes_dashboard/subcategory/ЗАКУСКА}"
+                       th:text="#{navbar_breakfasts}">Закуски</a>
+                </li>
+                <li>
+                    <a class="search-by-subcat" th:href="@{/recipes/recipes_dashboard/subcategory/БАНИЦА}"
+                       th:text="#{navbar_pie}">Баници</a>
+                </li>
+                <li>
+                    <a class="search-by-subcat" th:href="@{/recipes/recipes_dashboard/subcategory/ПАСТА}"
+                       th:text="#{navbar_pasta}">Паста</a>
+                </li>
+            </ul>
+        </a></li>
+        <li><a th:href="@{/recipes/recipes_dashboard/category/ОБЯД}">
+            <th:block th:text="#{navbar_lunch}"></th:block> &#x2771;
+            <ul>
+                <li>
+                    <a class="search-by-subcat" th:href="@{/recipes/recipes_dashboard/subcategory/СУПА}"
+                       th:text="#{navbar_soups_and_stews}">Супи и чорби</a>
+                </li>
+                <li>
+                    <a class="search-by-subcat" th:href="@{/recipes/recipes_dashboard/subcategory/САЛАТА}"
+                       th:text="#{navbar_salads}">Салати</a>
+                </li>
+            </ul>
+        </a></li>
+        <li><a th:href="@{/recipes/recipes_dashboard/category/ВЕЧЕРЯ}">
+            <th:block th:text="#{navbar_dinner}"></th:block> &#x2771;
+            <ul>
+                <li>
+                    <a class="search-by-subcat" th:href="@{/recipes/recipes_dashboard/vegetarian/0}"
+                       th:text="#{navbar_meat_dishes}">Ястия
+                        с месо</a>
+                </li>
+                <li>
+                    <a class="search-by-subcat" th:href="@{/recipes/recipes_dashboard/vegetarian/1}"
+                       th:text="#{navbar_meals_without_meat}">Ястия без месо</a>
+                </li>
+            </ul>
+        </a></li>
+        <li><a th:href="@{/recipes/recipes_dashboard/category/ДЕСЕРТ}">
+            <th:block th:text="#{navbar_dessert}"></th:block> &#x2771;
+            <ul>
+                <li>
+                    <a class="search-by-subcat" th:href="@{/recipes/recipes_dashboard/subcategory/КРЕМ}"
+                       th:text="#{navbar_creams}">Кремове</a>
+                </li>
+                <li>
+                    <a class="search-by-subcat" th:href="@{/recipes/recipes_dashboard/subcategory/КЕКС}"
+                       th:text="#{navbar_muffins}">Кексове</a>
+                </li>
+                <li>
+                    <a class="search-by-subcat" th:href="@{/recipes/recipes_dashboard/subcategory/СЛАДКИШ}"
+                       th:text="#{navbar_sweets}">Сладкиши</a>
+                </li>
+                <li>
+                    <a class="search-by-subcat" th:href="@{/recipes/recipes_dashboard/subcategory/ТОРТА}"
+                       th:text="#{navbar_cakes}">Торти</a>
+                </li>
+            </ul>
+        </a></li>
+        <li><a th:href="@{/recipes/recipes_dashboard}" th:text="#{navbar_all}">Всички рецепти</a></li>
+        <li><a th:href="@{/recipes/recipe_search}" th:text="#{navbar_search}">Търси</a></li>
+        <!-- Guest users -->
+        <th:block sec:authorize="!isAuthenticated()">
+            <li class="guest" style="width: 100px; float: right; margin-right: 10px;">
+                <a th:href="@{/user/register}" th:text="#{navbar_register}">Регистрация</a>
+            </li>
+            <li class="guest" style="width: 100px; float: right">
+                <a th:href="@{/user/login}" th:text="#{navbar_login}">Вход</a>
+            </li>
+        </th:block>
+        <!-- Logged users -->
+        <th:block sec:authorize="isAuthenticated()">
+            <li class="profile" style="width: 80px; float: right; margin-right: 5px;">
+                <form id="logoutBtn" th:action="@{/user/logout}" th:method="POST">
+                    <input class="logoutBtn" th:value="#{navbar_logout}" type="submit">
+                </form>
+            </li>
+            <!--            <li class="profile" style="width: 80px; float: right; margin-right: 5px;">-->
+            <!--                <a th:href="@{/recipes/recipes_dashboard}" th:text="#{navbar_favorite_recipes}">Любими рецепти</a>-->
+            <!--            </li>-->
+            <!--            <li class="profile" style="display: inline; width: 80px; float: right; margin-right: 5px;">-->
+            <!--                <a th:href="@{/recipes/recipes_dashboard}" th:text="#{navbar_my_recipes}">Моите рецепти</a>-->
+            <!--            </li>-->
+            <li class="profile" style="display: inline; width: 80px; float: right; margin-right: 5px;">
+                <a th:href="@{/recipes/recipe_add}" th:text="#{navbar_add_recipe}">Добави рецепта</a>
+            </li>
+        </th:block>
+    </ul>
+</header>
+</body>
+</html>

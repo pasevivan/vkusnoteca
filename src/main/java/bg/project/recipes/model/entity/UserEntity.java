@@ -14,7 +14,10 @@ public class UserEntity extends BaseEntity{
     @Column(nullable = false, unique = true)
     private String email;
     private String password;
-    @OneToMany(mappedBy = "user_id", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+
+    @Column(nullable = false)
+    private boolean active;
+    @OneToMany(mappedBy = "author", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private Set<RecipeEntity> userRecipes = new HashSet<>();
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name = "user_roles",
@@ -26,32 +29,38 @@ public class UserEntity extends BaseEntity{
         return firstName;
     }
 
-    public void setFirstName(String firstName) {
+    public UserEntity setFirstName(String firstName) {
         this.firstName = firstName;
+        return this;
     }
 
     public String getLastName() {
         return lastName;
     }
 
-    public void setLastName(String lastName) {
+    public UserEntity setLastName(String lastName) {
         this.lastName = lastName;
+        return this;
     }
 
     public String getEmail() {
         return email;
     }
 
-    public void setEmail(String email) {
+    public UserEntity setEmail(String email) {
         this.email = email;
+        return this;
     }
 
     public String getPassword() {
         return password;
     }
 
-    public void setPassword(String password) {
+
+
+    public UserEntity setPassword(String password) {
         this.password = password;
+        return this;
     }
 
     public Set<RecipeEntity> getUserRecipes() {
@@ -66,7 +75,17 @@ public class UserEntity extends BaseEntity{
         return userRoles;
     }
 
-    public void setUserRoles(Set<RoleEntity> userRoles) {
+    public boolean isActive() {
+        return active;
+    }
+
+    public UserEntity setActive(boolean active) {
+        this.active = active;
+        return this;
+    }
+
+    public UserEntity setUserRoles(Set<RoleEntity> userRoles) {
         this.userRoles = userRoles;
+        return this;
     }
 }

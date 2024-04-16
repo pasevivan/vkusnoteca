@@ -38,7 +38,6 @@ public interface RecipeMapper {
 
     @Mapping(source = "category", target = "category", qualifiedByName = "categoriesSet")
     @Mapping(source = "images", target = "images", qualifiedByName = "imagesSet")
-    @Mapping(source = "owner.firstName", target = "ownerFirstName")
-    @Mapping(source = "owner.lastName", target = "ownerLastName")
+    @Mapping(source = "author.firstName", target = "author")
     RecipeDTO recipeEntityToRecipeDTO(RecipeEntity recipeEntity);
 }

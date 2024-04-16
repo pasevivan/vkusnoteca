@@ -1,10 +1,11 @@
 package bg.project.recipes.model.user;
 
 import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.Collection;
 
-public class UserDetails {
+public class RecipeUserDetails implements UserDetails {
     private Long id;
     private  String firstName;
     private String lastName;
@@ -12,7 +13,7 @@ public class UserDetails {
     private String username;
     private Collection<GrantedAuthority> authorities;
 
-    public UserDetails(Long id, String firstName, String lastName, String password, String username, Collection<GrantedAuthority> authorities) {
+    public RecipeUserDetails(Long id, String firstName, String lastName, String password, String username, Collection<GrantedAuthority> authorities) {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
@@ -53,9 +54,7 @@ public class UserDetails {
         this.password = password;
     }
 
-    public String getUsername() {
-        return username;
-    }
+
 
     public void setUsername(String username) {
         this.username = username;
@@ -67,5 +66,30 @@ public class UserDetails {
 
     public void setAuthorities(Collection<GrantedAuthority> authorities) {
         this.authorities = authorities;
+    }
+
+    @Override
+    public String getUsername() {
+        return username;
+    }
+
+    @Override
+    public boolean isAccountNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isAccountNonLocked() {
+        return true;
+    }
+
+    @Override
+    public boolean isCredentialsNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isEnabled() {
+        return true;
     }
 }

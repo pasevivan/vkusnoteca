@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th=http://www.thymeleaf.org>
+
+<head>
+    <meta charset="UTF-8">
+    <meta content="IE=edge" http-equiv="X-UA-Compatible">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <meta content="рецепти, готварски рецепти, кулинарни рецепти, готвене, какво да сготвя, храна" name="keywords">
+    <meta content="Готварски рецепти със снимки, необходими продукти, порции, време за приготвяне и стъпки, които да следваш, за да сготвиш своето ястие."
+          property="description">
+    <link rel="stylesheet" href="/css/bootstrap.min.css"/>
+    <script src="/js/bootstrap.min.js"></script>
+    <link href="https://fonts.googleapis.com/css?family=Sofia" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Lobster&display=swap" rel="stylesheet">
+
+    <title>Да сготвим - Вход</title>
+</head>
+
+<body>
+<!-- Login Page -->
+<section id="login">
+    <div class="row container">
+        <div class="form-group col-md-12 mb-3" style="height: 640px">
+            <a id="icon" th:href="@{/}">
+                <img alt="logo" id="login_logo" src="/images/lets_cook.png">
+            </a>
+            <form id="login-form"
+                  th:action="@{/user/login}"
+                  th:method="POST">
+                <h2>Вход</h2>
+                <p>Моля, въведи своите данни.</p>
+                <hr>
+                <p>Email</p>
+                <input
+                        class="form-control"
+                        name="username"
+                        placeholder="Въведи Email"
+                        style="margin-top: -12px"
+                        th:value="${username}"
+                        type="text"
+                >
+                <p>Парола</p>
+                <input
+                        class="form-control"
+                        min="3"
+                        name="password"
+                        placeholder="Въведи парола"
+                        style="margin-top: -12px"
+                        type="password"
+                >
+                <p class="errors alert alert-danger" style="margin-top: -15px" th:if="${bad_credentials}">
+                    Невалиден Email и/или парола.
+                </p>
+                <input class="registerbtn" type="submit" value="Влизане">
+            </form>
+            <div class="signin">
+                <p>Все още нямаш акаунт?
+                    <a th:href="@{/user/register}">Регистрация</a>.
+                </p>
+            </div>
+        </div>
+    </div>
+</section>
+</body>
+
+</html>

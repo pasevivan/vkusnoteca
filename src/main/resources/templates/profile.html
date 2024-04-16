@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th=http://www.thymeleaf.org>
+<head>
+    <meta charset="UTF-8">
+    <meta content="IE=edge" http-equiv="X-UA-Compatible">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <meta content="рецепти, готварски рецепти, кулинарни рецепти, готвене, какво да сготвя, храна" name="keywords">
+    <meta content="Готварски рецепти със снимки, необходими продукти, порции, време за приготвяне и стъпки, които да следваш, за да сготвиш своето ястие."
+          property="description">
+
+    <link href="https://fonts.googleapis.com/css?family=Sofia" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Lobster&display=swap" rel="stylesheet">
+
+    <title>Да сготвим - Профил</title>
+</head>
+
+<body>
+
+
+
+<main class="p-5 align-content-center bg-blur my-register-div">
+    <div class="container mt-5" style="margin-top: 10px">
+        <div class="row d-flex align-content-center">
+            <div class="center">
+                <div class="col-md-7">
+                    <div class="profile-card p-3 py-4" th:object="${user}">
+                        <div class="text-center"><img class="rounded-circle" src="/images/profile.jpg" width="100">
+                        </div>
+                        <div class="text-center mt-3">
+                            <h3 class="mt-4 mb-0" th:text="*{fullName}"></h3>
+                            <span th:text="*{email}"></span><br><br><br>
+                            <div class="profile-btn">
+                                <button>
+                                    <a th:href="@{profile/{id}/edit(id=*{id})}">
+                                        Редактиране
+                                    </a>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+
+
+
+</body>
+</html>

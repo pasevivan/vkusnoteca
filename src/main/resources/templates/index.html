@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th=http://www.thymeleaf.org>
+
+<head>
+    <meta charset="UTF-8">
+    <meta content="IE=edge" http-equiv="X-UA-Compatible">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <meta content="рецепти, готварски рецепти, кулинарни рецепти, готвене, какво да сготвя, храна" name="keywords">
+    <meta content="Готварски рецепти със снимки, необходими продукти, порции, време за приготвяне и стъпки, които да следваш, за да сготвиш своето ястие."
+          property="description">
+    <link rel="stylesheet" href="/css/bootstrap.min.css"/>
+    <script src="/js/bootstrap.min.js"></script>
+    <link href="https://fonts.googleapis.com/css?family=Sofia" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Lobster&display=swap" rel="stylesheet">
+
+    <title>Да сготвим - сготви бързо, лесно, вкусно</title>
+</head>
+
+<body>
+<div id="container">
+
+    <div th:replace="fragments/navbar">Navbar</div>
+
+    <hr style="width:100%;text-align:left;margin-left:0">
+    <main id="site-content">
+        <!-- Main Content -->
+        <!-- Slideshow container -->
+
+        <!-- The dots/circles -->
+        <div style="text-align:center">
+            <span class="dot"></span>
+            <span class="dot"></span>
+            <span class="dot"></span>
+            <span class="dot"></span>
+        </div>
+        <hr style="width:100%;text-align:left;margin-left:0">
+
+        <p>Иван Великов Пасев</p>
+        <p>Уебсайт за готварски рецепти!</p>
+
+        <hr style="width:100%;text-align:left;margin-top:40px">
+
+            <th:block sec:authorize="!isAuthenticated()">
+
+                    <a th:href="@{/user/register}" th:text="#{navbar_register}">Регистрация</a>
+
+
+                    <a th:href="@{/user/login}" th:text="#{navbar_login}">Вход</a>
+
+            </th:block>
+            <!-- Logged users -->
+            <th:block sec:authorize="isAuthenticated()">
+                <li class="profile" style="width: 80px; float: right; margin-right: 5px;">
+                    <form id="logoutBtn" th:action="@{/user/logout}" th:method="POST">
+                        <input class="logoutBtn" th:value="#{navbar_logout}" type="submit">
+                    </form>
+                </li>
+            </th:block>
+            <ul class="categories" id="last-added-recipes">
+            </ul>
+
+
+        <hr style="width:100%;text-align:left;margin-top:10">
+
+
+    </main>
+
+
+
+</div>
+</body>
+
+</html>

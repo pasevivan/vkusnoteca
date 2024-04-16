@@ -38,7 +38,7 @@ public class RecipeEntity extends BaseEntity {
     private DifficultyEnum difficulty;
 
     @ManyToOne
-    @JoinColumn(name = "user_id", nullable = false)
+    @JoinColumn(name = "author_id", nullable = false)
     private UserEntity author;
 
     @Column(nullable = false)
