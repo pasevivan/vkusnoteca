@@ -32,8 +32,8 @@ logging:
 mail:
   host: "imap.gmail.com"
   port: 993
-  username: "pasevivan@gmail.com"
-  password: "SofiaBurgas1"
+  username: ""
+  password: ""
 
 management:
   server:
